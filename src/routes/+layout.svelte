@@ -26,9 +26,10 @@
 		duration: 200,
 		easing: sineIn
 	};
-	export let data: PageData;
 
-	$: console.debug(data);
+	// export let data: PageData;
+	import { data } from "./pages/pages";
+	$: console.log(data);
 
 	let breakPoint: number = 1024;
 	let width: number;
@@ -131,18 +132,18 @@
 	<Sidebar asideClass="w-54">
 		<SidebarWrapper divClass="overflow-y-auto py-4 px-3 rounded dark:bg-gray-800">
 			<SidebarGroup>
-				<SidebarItem {spanClass} label="- Home" href="/" on:click={toggleSide} active={activeUrl === `/`} />
-				<!-- 
-				{#each data.pages as { meta, path }}
+				<SidebarItem {spanClass} label="Home" href="/" on:click={toggleSide} active={activeUrl === `/`} />
+				{#each data as { title, path }}
 					<SidebarItem
-						label={meta.title}
-						href={`/pages/${path}`}
+						label={title}
+						href={`/pages${path}`}
 						{spanClass}
 						activeClass="flex items-center p-2 text-base font-normal text-gray-900 bg-primary-200 dark:bg-primary-700 rounded-lg dark:text-white hover:bg-primary-100 dark:hover:bg-primary-700"
 						on:click={toggleSide}
 						active={activeUrl === `/pages/${path}`}
 					/>
 				{/each}
+				<!-- 
 				<SidebarDropdownWrapper label="Articles">
 					{#each data.articles as { meta, path }}
 						<SidebarItem
